@@ -1,9 +1,58 @@
-<html>
-  <head>
-    <title>Todo Application</title>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
-  </head>
-  <body>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">		<!-- Bootstrap -->
+		<title>Todo Application</title>
+	 <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+	 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	</head>
+<body ng-app="toDoApp">
+	<div class="container" ng-controller="ToDoController">
+		<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-5 col-lg-offset-3 col-lg-5">
+			<h2>ToDo App</h2>
+			<!-- Form Starts Here -->
+			<div class="form">
+				<div class="input-group">
+					<h3> Task </h3>
+					<input type="text" class="form-control" ng-model="task">
+					<h3> Description </h3>
+					<input type="description" class="form-control" ng-model="description">
+					<h3> Date </h3>
+					<input type="datetime-local" class="form-control" ng-model="date">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button" ng-click="addTask()"><span
+							class="fa fa-plus"></span> Add Task</button>
+					</span>
+				</div><!-- /input-group -->
+			</div>
+			<hr/>
+			<!-- Form Ends Here -->
+
+			<!-- Task List Starts Here -->
+			<ul class="list-group" ng-show="tasks.length > 0">
+				<li class="list-group-item clearfix task" ng-repeat="todo in tasks" ng-class="{disabled: todo.done}">
+					<p class="lead">{{todo.task}}</p>
+					<p class="lead">{{todo.description}}</p>
+					<p class="lead">{{todo.date}}</p>
+					<div>
+						<span class="pull-right">
+							<button class="btn btn-default btn-xs"><span class="fa fa-pencil"
+								ng-click="editTask($index)"></span></button>
+							<button class="btn btn-primary btn-xs" ng-show="!todo.done"><span class="fa fa-check-square-o"
+								ng-click="doneTask($index)"></span></button>
+							<button class="btn btn-primary btn-xs" ng-show="todo.done"><span class="fa fa-repeat"
+								ng-click="unDoneTask($index)"></span></button>
+							<button class="btn btn-danger btn-xs"><span class="fa fa-times"
+								ng-click="deleteTask($index)"></span></button>
+						</span>
+					</div>
+				</li>
+			</ul>
+			<!-- Task List Ends Here -->
+		</div>
+	</div>
+	<br/>
+	<script src="js/app.js"></script>
+</body>
 </html>
